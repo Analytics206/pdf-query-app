@@ -1,0 +1,24 @@
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Python virtual environment
+.venv
+venv
+env
+*.pyc
+__pycache__/
+
+# Local data/uploads (these should use volumes, not be part of the image)
+# data/ # Uncomment if you don't want initial empty 'data' dir copied
+# uploads/ # Uncomment if you don't want initial empty 'uploads' dir copied
+
+# IDE/OS files
+.idea/
+.vscode/
+*.DS_Store

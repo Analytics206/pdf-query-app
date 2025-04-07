@@ -1,0 +1,25 @@
+# Base framework
+fastapi
+uvicorn[standard]
+
+# Langchain core and integrations
+langchain
+langchain-community
+langchain-huggingface
+
+# Vector store
+chromadb
+
+# PDF Parsing
+pypdf
+
+# --- Explicit Dependencies for Model Loading ---
+torch
+transformers # Keep this if you added it explicitly, otherwise fine
+accelerate   # <--- ADD THIS LINE
+
+# Embedding model (depends on torch, transformers, accelerate)
+sentence-transformers
+
+# Optional: For better async file handling in FastAPI
+python-multipart

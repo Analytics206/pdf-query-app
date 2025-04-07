@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  pdf_query_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pdf_query_service
+    ports:
+      - "8000:8000" # Map host port 8000 to container port 8000
+    volumes:
+      # Mount the persistent data volume for ChromaDB
+      - pdf_query_data:/app/data
+      # Optionally mount uploads if you want uploaded PDFs to persist on the host
+      # - ./uploads:/app/uploads
+      # For development: Mount code for live reload (requires installing watchfiles via pip)
+      # - ./app:/app/app
+    environment:
+      # You can override config here if needed, e.g.:
+      # - MODEL_NAME=sentence-transformers/paraphrase-MiniLM-L6-v2
+      # Ensure Chroma uses the mounted volume path inside container
+      - DB_PERSIST_DIR=/app/data/chroma_db
+    # If using live reload for development with uvicorn --reload
+    # command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    restart: unless-stopped # Automatically restart if it crashes
+
+volumes:
+  pdf_query_data: # Define the named volume for persistence
+    driver: local # Use the local driver (default)
